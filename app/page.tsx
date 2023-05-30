@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SideBarButtons from './components/sidebar_buttons'
 import EachPostedNew from './components/eachPostedNews';
 import EachPostedNews from './components/eachPostedNews';
+import Image from "next/image";
 
 export default function Home() {
 
@@ -56,7 +57,9 @@ export default function Home() {
     <div className='flex bg-zinc-950 h-screen'>
       {/* Side Bar */}
       <div className="bg-zinc-200 w-96 h-screen rounded-l-3xl text-black">
-        <img src='/AALogo.png' className='mx-28 my-5'/>
+        {/* <img src='/AALogo.png' className='mx-28 my-5'/> */}
+        <Image src='/AALogo.png' alt="" width={120} height={20} className='mx-28 my-5' />
+
         <div className='px-5 text-center'>
           <span className='text-base font-bold'> Addis Ababa City Adminstration Innovation and Technology Development Bureau </span>
         </div>
@@ -68,8 +71,9 @@ export default function Home() {
         </div>
 
         <div className='flex justify-center'>
-          <div className='flex items-center text-center justify-center my-96 w-36 py-2 rounded-2xl hover:bg-zinc-300'>
-            <img src="/icons/logout.png" className='w-8 h-5 pr-2'/>
+          <div className='flex items-center text-center justify-center my-96 w-36 py-2 rounded-2xl border border-gray-300 hover:bg-zinc-300'>
+            {/* <img src="/icons/logout.png" className='w-8 h-5 pr-2'/> */}
+            <Image src="/icons/logout.png" alt="" className='pr-2' width={26} height={26} />
             <span> Sign Out </span>
           </div>
         </div>
@@ -104,7 +108,9 @@ export default function Home() {
 
               {/* Notification */}
               <div className='rounded-2xl border-zinc-500 border p-2 hover:bg-zinc-600'>
-                <img src="/icons/notification.png" className='w-5 h-5' />
+                {/* <img src="/icons/notification.png" className='w-5 h-5' /> */}
+                <Image src="/icons/notification.png" alt="" width={18} height={18} />
+
               </div>
             </div>
 
@@ -118,7 +124,7 @@ export default function Home() {
             </div>
             
             {/* Posted News Component */}
-            <div className='flex w-full overflow-hidden'>
+            <div className='flex w-full overflow-scroll h-[530px]'>
               {
                 postedList.map(news => {
                   return <EachPostedNews image={news["image"]} headline={news["headline"]} body={news["body"]} date={news["date"]} />;
