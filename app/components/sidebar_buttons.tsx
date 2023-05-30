@@ -7,7 +7,7 @@ export default function SideBarButtons({buttonText, buttonIcon, onClickFunction,
     return (
         <div className={isChosen == true ? chosenStyle : normalStyle} onClick={(e) => onClickFunction()} >
             {/* <img src={buttonIcon} className="w-7 h-5 pr-2 "/> */}
-            <Image src={buttonIcon} alt="" className="pr-2 " width={30} height={30} />
+            <Image src={buttonIcon} alt="btnIcon" className="pr-2 " width={30} height={30} />
             
             <span> {buttonText} </span>
         </div>
