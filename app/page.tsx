@@ -127,7 +127,7 @@ export default function Home() {
             <div className='flex w-full overflow-scroll h-[530px]'>
               {
                 postedList.map(news => {
-                  return <EachPostedNews image={news["image"]} headline={news["headline"]} body={news["body"]} date={news["date"]} />;
+                  return <EachPostedNews key={Date.now()} image={news["image"]} headline={news["headline"]} body={news["body"]} date={news["date"]} />;
                 })
               }
             </div>
