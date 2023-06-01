@@ -4,6 +4,8 @@ import SideBarButtons from './components/sidebar_buttons'
 import EachPostedNew from './components/eachPostedNews';
 import EachPostedNews from './components/eachPostedNews';
 import Image from "next/image";
+import Dashboard from './components/dashboard';
+import Activities from './components/activities';
 
 export default function Home() {
 
@@ -54,7 +56,7 @@ export default function Home() {
   ];
 
   return (
-    <div className='flex bg-zinc-950 h-screen'>
+    <div className='flex bg-zinc-950 h-screen overflow-hidden '>
       {/* Side Bar */}
       <div className="bg-zinc-200 w-96 h-screen rounded-l-3xl text-black">
         {/* <img src='/AALogo.png' className='mx-28 my-5'/> */}
@@ -82,7 +84,7 @@ export default function Home() {
       </div>
 
       {/* Main Control */}
-      <div className="bg-zinc-200 w-screen overflow-scroll">
+      <div className="w-screen overflow-scroll bg-zinc-900">
         <div className="bg-zinc-800 h-screen rounded-l-3xl shadow-black shadow-xl ">
           
           {/* Nav Bar */}
@@ -116,25 +118,11 @@ export default function Home() {
 
           </div>
 
-          {/* Stats */}
-          <div className='text-white mt-2 px-10 py-5 h-screen bg-zinc-800'>
-
-            <div className='mb-8'>
-              <span className='uppercase font-bold'> News </span>
-            </div>
-            
-            {/* Posted News Component */}
-            <div className='flex w-full overflow-scroll h-[530px]'>
-              {
-                postedList.map(news => {
-                  return <EachPostedNews key={Date.now()} image={news["image"]} headline={news["headline"]} body={news["body"]} date={news["date"]} />;
-                })
-              }
-            </div>
-            
-          
-          </div>
-
+          {/* Dashboard, Activities and Setting */}
+          {currentIndex == 1 ? 
+            <Dashboard postedList={postedList}/>
+            : <Activities />
+          }
           
         </div>
       </div>
