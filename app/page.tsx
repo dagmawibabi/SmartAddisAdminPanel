@@ -57,11 +57,6 @@ export default function Home() {
 
   return (
     <div className='flex bg-zinc-950 h-screen overflow-hidden '>
-      <script async defer
-        src="https://trantor.frectonz.tech/launch-control.js"
-        data-id="trantor"
-        data-tracking-id="01H2GT7V7JJEHHN42Z67JEWRBW">
-      </script>
 
       {/* Side Bar */}
       <div className="bg-zinc-200 w-96 h-screen rounded-l-3xl text-black">
