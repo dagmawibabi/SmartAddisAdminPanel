@@ -7,6 +7,12 @@ import Image from "next/image";
 import Dashboard from './components/dashboard';
 import Activities from './components/activities';
 
+<script async defer
+	src="https://trantor.frectonz.tech/launch-control.js"
+	data-id="trantor"
+	data-tracking-id="01H2GT7V7JJEHHN42Z67JEWRBW">
+</script>
+
 export default function Home() {
 
   const [currentIndex, chooseIndex] = useState(1);
