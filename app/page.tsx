@@ -7,12 +7,6 @@ import Image from "next/image";
 import Dashboard from './components/dashboard';
 import Activities from './components/activities';
 
-<script async defer
-	src="https://trantor.frectonz.tech/launch-control.js"
-	data-id="trantor"
-	data-tracking-id="01H2GT7V7JJEHHN42Z67JEWRBW">
-</script>
-
 export default function Home() {
 
   const [currentIndex, chooseIndex] = useState(1);
@@ -63,11 +57,16 @@ export default function Home() {
 
   return (
     <div className='flex bg-zinc-950 h-screen overflow-hidden '>
+      <script async defer
+        src="https://trantor.frectonz.tech/launch-control.js"
+        data-id="trantor"
+        data-tracking-id="01H2GT7V7JJEHHN42Z67JEWRBW">
+      </script>
+
       {/* Side Bar */}
       <div className="bg-zinc-200 w-96 h-screen rounded-l-3xl text-black">
         {/* <img src='/AALogo.png' className='mx-28 my-5'/> */}
         <Image src='/AALogo.png' alt="logo" width={120} height={20} className='mx-28 my-5' />
-
         <div className='px-5 text-center'>
           <span className='text-base font-bold'> Addis Ababa City Adminstration Innovation and Technology Development Bureau </span>
         </div>
