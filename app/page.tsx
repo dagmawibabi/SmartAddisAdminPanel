@@ -6,6 +6,7 @@ import EachPostedNews from './components/eachPostedNews';
 import Image from "next/image";
 import Dashboard from './components/dashboard';
 import Activities from './components/activities';
+import NewContent from './components/newContent';
 
 export default function Home() {
 
@@ -67,6 +68,7 @@ export default function Home() {
         </div>
         
         <div className='grid justify-center mt-10 py-10'>
+          <SideBarButtons buttonText="New Post" buttonIcon='/icons/settings.png' onClickFunction={() => choosePage(0)} isChosen={currentIndex == 0 ? true : false}/>
           <SideBarButtons buttonText="Dashboard" buttonIcon='/icons/dashboard.png' onClickFunction={() => choosePage(1)} isChosen={currentIndex == 1 ? true : false} />
           <SideBarButtons buttonText="Activity" buttonIcon='/icons/activity.png' onClickFunction={() => choosePage(2)} isChosen={currentIndex == 2 ? true : false}/>
           <SideBarButtons buttonText="Setting" buttonIcon='/icons/settings.png' onClickFunction={() => choosePage(3)} isChosen={currentIndex == 3 ? true : false}/>
@@ -91,7 +93,7 @@ export default function Home() {
           <div className='flex justify-between items-center px-8 py-6 w-full bg-zinc-800'>
 
             {/* Control Title */}
-            <span className='font-bold text-xl uppercase w-52'> {currentIndex == 1 ? "Dashboard" : currentIndex == 2 ? "Activity" : "Settings" } </span>
+            <span className='font-bold text-xl uppercase w-52'> {currentIndex == 0 ? "New Post" : currentIndex == 1 ? "Dashboard" : currentIndex == 2 ? "Activity" : "Settings" } </span>
 
             {/* Search */}
             <div className='flex border border-zinc-700 rounded-3xl'>
@@ -119,7 +121,9 @@ export default function Home() {
           </div>
 
           {/* Dashboard, Activities and Setting */}
-          {currentIndex == 1 ? 
+          {currentIndex == 0 ? 
+            <NewContent /> :
+              currentIndex == 1 ?
             <Dashboard postedList={postedList}/>
             : <Activities />
           }
