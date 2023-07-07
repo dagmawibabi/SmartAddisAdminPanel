@@ -1,6 +1,12 @@
+import moment from "moment";
 import Image from "next/image";
+import daisyui from "daisyui";
 
 export default function EachPostedNews({image, headline, body, date} : {image:string, headline:string, body:string, date:string}) {
+    // Make Date Readable 
+    const rawDate = moment(date, 'YYYY-MM-DDTHH:mm:ss.sssZ');
+    let convertedDate = rawDate.format('MMMM D, YYYY HH:mm:ss');
+    
     return (
         <div className='w-96 h-fit mx-5 shadow-lg shadow-zinc-900 rounded-2xl bg-clip-border overflow-clip hover:shadow-zinc-950 '>
 
@@ -10,14 +16,20 @@ export default function EachPostedNews({image, headline, body, date} : {image:st
                 <Image src={image} alt="newsimage" className='w-full h-full' width={100} height={100} />
             </div>
             <div className='p-3 bg-zinc-800 shadow-lg shadow-white'>
+                {/* News Date */}
+                <div className='text-xs pb-2 text-zinc-400'>
+                    <p className=''>
+                        {convertedDate}
+                    </p>
+                </div>
 
                 {/* News Headline */}
-                <div className='pb-4'>
+                <div className='pb-2'>
                     <span className='font-bold'> {headline} </span>
                 </div>
 
                 {/* News Body */}
-                <div className='h-32 overflow-scroll text-sm '>
+                <div className='h-32 overflow-scroll text-sm bg-zinc-900 rounded-lg p-2 hover:bg-zinc-950'>
                     <p className=''>
                         {body}
                     </p>

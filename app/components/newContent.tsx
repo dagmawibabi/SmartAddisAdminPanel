@@ -1,9 +1,45 @@
+'use client';
+
+import axios from "axios";
 import EachPostedNews from "./eachPostedNews";
+import { useEffect, useState } from "react";
 
 export default function NewContent() {
-
+    let initialNewsPreview = {
+        // "id": string,
+        "title": "Initial" as string,
+        "content": "Initial" as string,
+        "author": "" as string,
+        // "published": boolean,
+        "pillars": [""] as Array<any>,
+        "companies": [""] as Array<any>,
+        // "createdAt": string,
+        // "updatedAt": "",
+    }
     function setNewsPreview() {
+        let newsHeadlineInput = document.getElementById("newsHeadline") as HTMLInputElement;
+        let headline = newsHeadlineInput.value;
+        let newsBodyInput = document.getElementById("newsBody") as HTMLInputElement;
+        let body = newsBodyInput.value;
 
+
+        let newsObject = {            
+            "title": headline as string,
+            "content": body as string,
+            "author": "6464b045ff7637578f7f2c3b" as string,
+            "pillars": ["64a6b8eecda18028cd8cd07e"] as Array<string>,
+            "companies": ["64a6eb62285317c2fa07d872"] as Array<string>
+        };
+
+        setPreviewNews(newsObject);
+    }
+
+    const [previewNews, setPreviewNews] = useState(initialNewsPreview);
+
+    async function publishNews() {
+        await axios.post("https://smartcity-ohdk.onrender.com/v1/news/", 
+            previewNews
+        ).then((response) => {console.log(response)}).catch((e) => console.log(e));
     }
 
     return (
@@ -16,26 +52,39 @@ export default function NewContent() {
                         {/* Headline */}
                         <span> News Headline </span>
                         <div>
-                            <input type="text" placeholder="Headline" className="input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" />
+                            <input 
+                                id="newsHeadline"
+                                type="text" 
+                                placeholder="Headline" 
+                                onChange={setNewsPreview}
+                                className="input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" 
+                            />
                         </div>
                         <div className="mt-5"></div>
 
                         {/* Content */}
                         <span> News Body </span>
                         <div>
-                            <textarea placeholder="Body" className="w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56"> </textarea>
+                            <textarea 
+                                id="newsBody" 
+                                placeholder="Body" 
+                                onChange={setNewsPreview}
+                                className="w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56"
+                            > 
+                            </textarea>
                         </div>
                         
                         {/* Publish */}
                         <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
-                            <button> Publish </button>
+                            <button onClick={publishNews}> Publish </button>
                         </div>
 
                     </div>
 
+                    {/* Preview */}
                     <div className="">
 
-                        <EachPostedNews headline="" body="" image="/newsTemplate.png" date={Date.now().toString()} />
+                        <EachPostedNews headline={previewNews["title"]} body={previewNews["content"]} image="/newsTemplate.png" date={Date.now().toString()} />
 
                     </div>
 

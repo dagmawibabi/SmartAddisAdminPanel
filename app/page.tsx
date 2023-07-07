@@ -10,7 +10,7 @@ import NewContent from './components/newContent';
 
 export default function Home() {
 
-  const [currentIndex, chooseIndex] = useState(1);
+  const [currentIndex, chooseIndex] = useState(0);
 
   function choosePage(index: number) {
     chooseIndex(index);
@@ -124,7 +124,7 @@ export default function Home() {
           {currentIndex == 0 ? 
             <NewContent /> :
               currentIndex == 1 ?
-            <Dashboard postedList={postedList}/>
+            <Dashboard/>
             : <Activities />
           }
           
