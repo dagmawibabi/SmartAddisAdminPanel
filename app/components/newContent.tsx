@@ -57,59 +57,11 @@ export default function NewContent() {
     return (
         <div className="text-white">
             <div className='text-white mt-2 px-10 pt-5 pb-5 h-fit bg-zinc-800 overflow-scroll'>
-                <span className="font-bold text-lg"> Create News Post </span>
-                <div className="flex bg-red w-4/5">
-                    <div className="pl-5 pt-5 mr-10 w-full">
+                <span className="font-bold text-lg "> Create News Post </span>
 
-                        {/* Headline */}
-                        <span> News Headline </span>
-                        <div>
-                            <input 
-                                id="newsHeadline"
-                                type="text" 
-                                placeholder="Headline" 
-                                onChange={setNewsPreview}
-                                className={ isPublishing == false ?
-                                    "input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" :                            
-                                    "input input-bordered input-info w-full max-w-lg bg-zinc-900 input-disabled rounded-2xl mt-3 p-2 pl-5" 
-                                }
-                                disabled={isPublishing}
-                            />
-                        </div>
-                        <div className="mt-5"></div>
-
-                        {/* Content */}
-                        <span> News Body </span>
-                        <div>
-                            <textarea 
-                                id="newsBody" 
-                                placeholder="Body" 
-                                onChange={setNewsPreview}
-                                className={ isPublishing == false?
-                                    "w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56" :                 
-                                    "w-full max-w-lg bg-zinc-900 textarea-disabled rounded-2xl mt-3 p-2 h-56" 
-                                }
-                                disabled={isPublishing}
-                            > 
-                            </textarea>
-                        </div>
-                        
-                        {/* Publish */}
-                        {
-                            isPublishing == true ? 
-                            <div>
-                                <span className="loading loading-spinner loading-lg mt-4 text-success"></span>
-                            </div> :
-                            <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
-                                <button onClick={publishNews}> Publish </button>
-                            </div>
-                        }
-
-                    </div>
-
+                <div className="flex justify-left py-10">
                     {/* Preview */}
-                    <div className="">
-
+                    <div className="w-fit">
                         <EachPostedNews 
                             previewMode={true} 
                             headline={previewNews["title"]} 
@@ -118,41 +70,134 @@ export default function NewContent() {
                             date={Date.now().toString()} 
                             id={""} deleteFunction={()=>{}} 
                         />
+                    </div>
+                    
+                    {/* Input */}
+                    <div className="flex w-1/3">
+                        <div className="pl-5 mr-10 w-full">
+
+                            {/* Headline */}
+                            <span> News Headline </span>
+                            <div>
+                                <input 
+                                    id="newsHeadline"
+                                    type="text" 
+                                    placeholder="Headline" 
+                                    onChange={setNewsPreview}
+                                    className={ isPublishing == false ?
+                                        "input input-bordered w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" :                            
+                                        "input input-bordered w-full max-w-lg bg-zinc-900 input-disabled rounded-2xl mt-3 p-2 pl-5" 
+                                    }
+                                    disabled={isPublishing}
+                                />
+                            </div>
+                            <div className="mt-5"></div>
+
+                            {/* Image */}
+                            <span> News Image </span>
+                            <div>
+                                {/* <input 
+                                    id="newsHeadline"
+                                    type="text" 
+                                    placeholder="Headline" 
+                                    onChange={setNewsPreview}
+                                    className={ isPublishing == false ?
+                                        "input input-bordered w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" :                            
+                                        "input input-bordered w-full max-w-lg bg-zinc-900 input-disabled rounded-2xl mt-3 p-2 pl-5" 
+                                    }
+                                    disabled={isPublishing}
+                                /> */}
+                                <input 
+                                    type="file" 
+                                    className={ isPublishing == false ? 
+                                        "file-input file-input-bordered w-full max-w-md bg-zinc-700 rounded-2xl mt-4" :
+                                        "file-input file-input-bordered w-full max-w-xs" 
+                                    } 
+                                />
+                            </div>
+                            <div className="mt-5"></div>
+
+                            {/* Content */}
+                            <span> News Body </span>
+                            <div>
+                                <textarea 
+                                    id="newsBody" 
+                                    placeholder="Body" 
+                                    onChange={setNewsPreview}
+                                    className={ isPublishing == false?
+                                        "w-full max-w-lg bg-zinc-700 input rounded-2xl mt-3 p-2 h-56" :                 
+                                        "w-full max-w-lg bg-zinc-900 textarea-disabled rounded-2xl mt-3 p-2 h-56" 
+                                    }
+                                    disabled={isPublishing}
+                                > 
+                                </textarea>
+                            </div>
+                            
+                            {/* Publish */}
+                            {
+                                isPublishing == true ? 
+                                <div>
+                                    <span className="loading loading-spinner loading-lg mt-4 text-success"></span>
+                                </div> :
+                                <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
+                                    <button onClick={publishNews}> Publish </button>
+                                </div>
+                            }
+
+                        </div>
+
 
                     </div>
-
                 </div>
+
             </div>
+
+            <div className="divider"></div>
 
             <div className='text-white mt-2 px-10 pt-5 pb-5 h-fit bg-zinc-800 overflow-scroll'>
                 <span className="font-bold text-lg"> Create Event </span>
-                <div className="pl-5 pt-5">
 
-                    {/* Event Name */}
-                    <span> Event Name </span>
-                    <div>
-                        <input type="text" placeholder="Event Name" className="input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" />
-                    </div>
-                    <div className="mt-5"></div>
-
-                    {/* Date */}
-                    <span> Event Date </span>
-                    <div>
-                        <input type="date" placeholder="Event Name" className="input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" />
-                    </div>
-                    <div className="mt-5"></div>
-
-                    {/* Content */}
-                    <span> Event Details </span>
-                    <div>
-                        <textarea placeholder="Body" className="w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56"> </textarea>
-                    </div>
-                    
-                    {/* Publish */}
-                    <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
-                        <button> Publish </button>
+                <div className="flex justify-left py-10">
+                    {/* Preview */}
+                    <div className="w-fit">
+                        <EachPostedNews 
+                            previewMode={true} 
+                            headline={previewNews["title"]} 
+                            body={previewNews["content"]} 
+                            image="/newsTemplate.png" 
+                            date={Date.now().toString()} 
+                            id={""} deleteFunction={()=>{}} 
+                        />
                     </div>
 
+                    <div className="w-1/3 ml-7">
+
+                        {/* Event Name */}
+                        <span> Event Name </span>
+                        <div>
+                            <input type="text" placeholder="Event Name" className="input w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" />
+                        </div>
+                        <div className="mt-5"></div>
+
+                        {/* Date */}
+                        <span> Event Date </span>
+                        <div>
+                            <input type="date" placeholder="Event Name" className="input w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" />
+                        </div>
+                        <div className="mt-5"></div>
+
+                        {/* Content */}
+                        <span> Event Details </span>
+                        <div>
+                            <textarea placeholder="Body" className="input w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56"> </textarea>
+                        </div>
+                        
+                        {/* Publish */}
+                        <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
+                            <button> Publish </button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
