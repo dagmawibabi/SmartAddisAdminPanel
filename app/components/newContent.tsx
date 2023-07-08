@@ -16,12 +16,15 @@ export default function NewContent() {
         // "createdAt": string,
         // "updatedAt": "",
     }
+
+    const [isPublishing, setIsPublishing] = useState(false);
+    const [previewNews, setPreviewNews] = useState(initialNewsPreview);
+
     function setNewsPreview() {
         let newsHeadlineInput = document.getElementById("newsHeadline") as HTMLInputElement;
         let headline = newsHeadlineInput.value;
         let newsBodyInput = document.getElementById("newsBody") as HTMLInputElement;
         let body = newsBodyInput.value;
-
 
         let newsObject = {            
             "title": headline as string,
@@ -34,12 +37,21 @@ export default function NewContent() {
         setPreviewNews(newsObject);
     }
 
-    const [previewNews, setPreviewNews] = useState(initialNewsPreview);
 
     async function publishNews() {
+        setIsPublishing(true);
         await axios.post("https://smartcity-ohdk.onrender.com/v1/news/", 
             previewNews
         ).then((response) => {console.log(response)}).catch((e) => console.log(e));
+        setPreviewNews(initialNewsPreview);
+
+        let newsHeadlineInput = document.getElementById("newsHeadline") as HTMLInputElement;
+        newsHeadlineInput.value = "";
+        let newsBodyInput = document.getElementById("newsBody") as HTMLInputElement;
+        newsBodyInput.value = "";
+
+        setIsPublishing(false);
+
     }
 
     return (
@@ -57,7 +69,11 @@ export default function NewContent() {
                                 type="text" 
                                 placeholder="Headline" 
                                 onChange={setNewsPreview}
-                                className="input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" 
+                                className={ isPublishing == false ?
+                                    "input input-bordered input-info w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 pl-5" :                            
+                                    "input input-bordered input-info w-full max-w-lg bg-zinc-900 input-disabled rounded-2xl mt-3 p-2 pl-5" 
+                                }
+                                disabled={isPublishing}
                             />
                         </div>
                         <div className="mt-5"></div>
@@ -69,22 +85,39 @@ export default function NewContent() {
                                 id="newsBody" 
                                 placeholder="Body" 
                                 onChange={setNewsPreview}
-                                className="w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56"
+                                className={ isPublishing == false?
+                                    "w-full max-w-lg bg-zinc-700 rounded-2xl mt-3 p-2 h-56" :                 
+                                    "w-full max-w-lg bg-zinc-900 textarea-disabled rounded-2xl mt-3 p-2 h-56" 
+                                }
+                                disabled={isPublishing}
                             > 
                             </textarea>
                         </div>
                         
                         {/* Publish */}
-                        <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
-                            <button onClick={publishNews}> Publish </button>
-                        </div>
+                        {
+                            isPublishing == true ? 
+                            <div>
+                                <span className="loading loading-spinner loading-lg mt-4 text-success"></span>
+                            </div> :
+                            <div className="rounded-3xl py-2 px-10 mt-4 bg-green-500 w-fit text-black hover:bg-green-400 hover:cursor-pointer">
+                                <button onClick={publishNews}> Publish </button>
+                            </div>
+                        }
 
                     </div>
 
                     {/* Preview */}
                     <div className="">
 
-                        <EachPostedNews headline={previewNews["title"]} body={previewNews["content"]} image="/newsTemplate.png" date={Date.now().toString()} />
+                        <EachPostedNews 
+                            previewMode={true} 
+                            headline={previewNews["title"]} 
+                            body={previewNews["content"]} 
+                            image="/newsTemplate.png" 
+                            date={Date.now().toString()} 
+                            id={""} deleteFunction={()=>{}} 
+                        />
 
                     </div>
 
